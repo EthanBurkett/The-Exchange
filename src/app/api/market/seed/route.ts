@@ -48,5 +48,5 @@ export async function POST() {
       .onConflictDoNothing();
   }
 
-  return NextResponse.json({ ok: false, count: INITIAL.length });
+  return NextResponse.json({ ok: true, count: INITIAL.length });
 }
