@@ -1,4 +1,5 @@
 import { db } from "@/db/client";
+import { ensureSchema } from "@/db/ensure";
 import { resources } from "@/db/schema";
 import { NextResponse } from "next/server";
 
@@ -30,6 +31,7 @@ const INITIAL = [
 ];
 
 export async function POST() {
+  await ensureSchema();
   for (const r of INITIAL) {
     await db
       .insert(resources)
@@ -46,5 +48,5 @@ export async function POST() {
       .onConflictDoNothing();
   }
 
-  return NextResponse.json({ ok: true, count: INITIAL.length });
+  return NextResponse.json({ ok: false, count: INITIAL.length });
 }
